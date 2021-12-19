@@ -1,4 +1,5 @@
-﻿using AnimeCollection.DAL.Interfaces;
+﻿using AnimeCollection.API.Filters;
+using AnimeCollection.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace AnimeCollection.API.Controllers
         }
 
         [HttpGet]
+        [AnimeCollectionResultFilter]
         public async Task<IActionResult> GetAnimeCollection()
         {
             var animeCollection = await _animeCollectionRepository.GetAnimeCollectionAsync();
@@ -26,7 +28,7 @@ namespace AnimeCollection.API.Controllers
         }
 
         [HttpGet]
-        [Route("id")]
+        [AnimeResultFilterAttribute]
         [Route("{id}")]
         public async Task<IActionResult> GetAnime(Guid id)
         {

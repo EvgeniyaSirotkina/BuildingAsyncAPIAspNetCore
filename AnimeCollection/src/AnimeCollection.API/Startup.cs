@@ -3,15 +3,11 @@ using AnimeCollection.DAL.Interfaces;
 using AnimeCollection.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AnimeCollection.API
 {
@@ -30,6 +26,8 @@ namespace AnimeCollection.API
             var connectionString = Configuration["ConnectionStrings:AnimeCollectionDBConnectionString"];
             services.AddDbContext<AnimeCollectionContext>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("AnimeCollection.API")));
             services.AddScoped<IAnimeCollectionRepository, AnimeCollectionRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
         }

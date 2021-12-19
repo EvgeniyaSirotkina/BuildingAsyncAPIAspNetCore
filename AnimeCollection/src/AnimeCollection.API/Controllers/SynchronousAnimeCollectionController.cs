@@ -1,4 +1,5 @@
-﻿using AnimeCollection.DAL.Interfaces;
+﻿using AnimeCollection.API.Filters;
+using AnimeCollection.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AnimeCollection.API.Controllers
@@ -15,6 +16,7 @@ namespace AnimeCollection.API.Controllers
         }
 
         [HttpGet]
+        [AnimeCollectionResultFilter]
         public IActionResult GetAnimeCollection()
         {
             var animeCollection = _animeCollectionRepository.GetAnimeCollection();
