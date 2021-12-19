@@ -5,9 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace AnimeCollection.API
 {
@@ -15,7 +13,9 @@ namespace AnimeCollection.API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // throttle the thread pool (set available threads to amount of processors)
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount, Environment.ProcessorCount);
+
             var host = CreateHostBuilder(args).Build();
 
             // migrate the database.  Best practice = in Main, using service scope
