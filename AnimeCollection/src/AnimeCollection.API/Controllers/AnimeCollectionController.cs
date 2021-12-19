@@ -27,6 +27,7 @@ namespace AnimeCollection.API.Controllers
 
         [HttpGet]
         [Route("id")]
+        [Route("{id}")]
         public async Task<IActionResult> GetAnime(Guid id)
         {
             var anime = await _animeCollectionRepository.GetAnimeAsync(id);
